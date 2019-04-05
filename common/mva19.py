@@ -41,41 +41,6 @@ def peaks_to_hand(peaks, dx,dy):
     return np.array(hand,dtype=np.float32)
 
 
-def visualize_2dhand_skeleton(canvas, hand, stickwidth = 3, thre=0.1):
-  
-    for pair in limbSeq:
-        if hand[pair[0]][2]>thre and hand[pair[1]][2]>thre:
-            x0,y0 = hand[pair[0]][:2]
-            x1,y1 = hand[pair[1]][:2]
-            x0 = int(x0)
-            x1 = int(x1)
-            y0 = int(y0)
-            y1 = int(y1)    
-            cv2.line(canvas,(x0,y0), (x1,y1), colors[pair[1]%len(colors)], thickness=stickwidth,lineType=cv2.LINE_AA)
-
-    return canvas
-
-def visualize_3dhand_skeleton(canvas, hand, stickwidth = 10, txt_size=0.5):
-  
-    for pair in limbSeq:
-            x0,y0 = hand[pair[0]][:2]
-            x1,y1 = hand[pair[1]][:2]
-            x0 = int(x0)
-            x1 = int(x1)
-            y0 = int(y0)
-            y1 = int(y1)    
-            cv2.line(canvas,(x0,y0), (x1,y1), colors[pair[1]%len(colors)], thickness=stickwidth,lineType=cv2.LINE_AA)
-
-    for i, p in enumerate(hand):
-        x,y = int(p[0]), int(p[1])
-        cv2.circle(canvas, (x,y), 4, colors[i%len(colors)], thickness=stickwidth, lineType=cv2.LINE_AA)
-        if txt_size>0:
-            cv2.putText(canvas, str(i), (x+5,y), 0, txt_size, colors[i%len(colors)],lineType=cv2.LINE_AA)
-
-
-    return canvas
-
-
 def load_graph(model_file):
     graph = tf.Graph()
     graph_def = tf.GraphDef()

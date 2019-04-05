@@ -17,8 +17,6 @@ import numpy as np
 import cv2
 import time
 
-from cvcommons.dataset.recorders import Recorder
-
 
 if __name__ == "__main__":
 
@@ -56,9 +54,9 @@ if __name__ == "__main__":
         hm = cv2.resize(hm, (0, 0), fx=stride, fy=stride)
         bg = cv2.normalize(hm[:, :, -1], None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8UC1)
         viz = cv2.normalize(np.sum(hm[:, :, :-1], axis=2), None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8UC1)
-        cv2.imshow("BG", bg)
-        cv2.imshow("HM", viz)
-        cv2.imshow("FRAME", frame)
+        cv2.imshow("Background", bg)
+        cv2.imshow("All joint heatmaps", viz)
+        cv2.imshow("Input frame", frame)
 
         k = cv2.waitKey(delay[paused])
 
